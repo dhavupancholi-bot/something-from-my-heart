@@ -91,10 +91,10 @@
 
 <div class="container hidden" id="yesPage">
     <div class="heart">💞</div>
-    <h1>You Made Me So Happy 💖</h1>
-    <p>My heart is overflowing with joy.</p>
+    <h1>Thank you for letting me into your heart… you’ve made mine a home full of love and joy 💖</h1>
+    <p>Every heartbeat whispers your name, Charmi.</p>
     <p><strong>Our Date:</strong><br>🌹 14th February<br>🍽️ Dinner • Endless Talks</p>
-    <p>Every moment with you feels like forever,<br>forever yours, Dhaval ❤️</p>
+    <<p>No matter the distance or time,<br>my heart will always be yours, Dhaval ❤️</p>
 </div>
 
 <script>
@@ -119,8 +119,8 @@ const noBtn = document.getElementById("no");
 const container = document.querySelector(".container");
 const messages = [
     "Are you sure? 🥺",
-    "Think again 💭",
     "Hey… don’t rush 😅",
+    "This matters to me 💓",
     "My heart is waiting 💕",
     "Please reconsider! 😍",
     "I promise it’ll be fun! 💖"
@@ -128,25 +128,30 @@ const messages = [
 ];
 
 noBtn.addEventListener("click", () => {
-    const maxX = container.offsetWidth - noBtn.offsetWidth;
-    const maxY = container.offsetHeight - noBtn.offsetHeight;
-    
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-    
+    // Get container dimensions
+    const containerRect = container.getBoundingClientRect();
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    // Random position inside container (fully visible)
+    const x = Math.random() * (containerRect.width - btnWidth);
+    const y = Math.random() * (containerRect.height - btnHeight);
+
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
 
+    // Floating message
     const msg = document.createElement("div");
     msg.className = "message";
     msg.innerText = messages[Math.floor(Math.random() * messages.length)];
     container.appendChild(msg);
 
-    const msgX = x + noBtn.offsetWidth / 2;
+    const msgX = x + btnWidth / 2;
     msg.style.left = `${msgX}px`;
     msg.style.top = `${y - 40}px`;
 
     setTimeout(() => msg.remove(), 1500);
+});
 });
 </script>
 
