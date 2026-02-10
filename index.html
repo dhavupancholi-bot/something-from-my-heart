@@ -25,7 +25,6 @@
         overflow: hidden;
         z-index: 1;
     }
-
     .heart-float {
         position: absolute;
         bottom: -20px;
@@ -33,7 +32,6 @@
         animation: floatUp linear forwards;
         opacity: 0.8;
     }
-
     @keyframes floatUp {
         from { transform: translateY(0) scale(1); opacity: 1; }
         to { transform: translateY(-110vh) scale(1.6); opacity: 0; }
@@ -51,9 +49,7 @@
     }
 
     .hidden { display: none; }
-
     .heart { font-size: 60px; animation: pulse 1.5s infinite alternate; }
-
     @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.3); } }
 
     h1 { color: #ff1a75; margin-bottom: 10px; }
@@ -62,26 +58,20 @@
     img { width: 100%; height: auto; object-fit: contain; border-radius: 10px; margin: 15px 0; }
 
     .buttons { display: flex; justify-content: space-around; margin-top: 20px; position: relative; height: 50px; }
-
     button { padding: 10px 24px; font-size: 16px; border: none; border-radius: 20px; cursor: pointer; }
     #yes { background: #ff4d6d; color: white; }
-    #no { background: #ddd; position: relative; }
+    #no { background: #ddd; position: absolute; }
 
     .message {
         position: absolute;
-        top: -45px;
-        left: 50%;
-        transform: translateX(-50%);
         background: #ffe6eb;
         color: #ff1a75;
         padding: 8px 14px;
         border-radius: 20px;
         font-size: 14px;
-        animation: floatMsg 1.5s ease;
         white-space: nowrap;
+        z-index: 10;
     }
-
-    @keyframes floatMsg { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, -10px); } }
 </style>
 </head>
 <body>
@@ -97,16 +87,14 @@
         <button id="yes">Yes 💖</button>
         <button id="no">No 🙈</button>
     </div>
-    <div id="msg"></div>
 </div>
 
 <div class="container hidden" id="yesPage">
     <div class="heart">💞</div>
-    <h1>Thank you for letting me into your heart… you’ve made mine a full of love and joy 💖</h1>
-    <p>You means the world to me.</p>
+    <h1>You Made Me So Happy 💖</h1>
+    <p>My heart is overflowing with joy.</p>
     <p><strong>Our Date:</strong><br>🌹 14th February<br>🍽️ Dinner • Endless Talks</p>
-    <p>No matter the distance or time,<br>my heart will always be yours.</p>
-    <p><strong>Forever yours, Dhaval ❤️</strong></p>
+    <p>Every moment with you feels like forever,<br>forever yours, Dhaval ❤️</p>
 </div>
 
 <script>
@@ -122,7 +110,13 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 7000);
 }, 400);
 
+document.getElementById("yes").addEventListener("click", () => {
+    document.getElementById("main").classList.add("hidden");
+    document.getElementById("yesPage").classList.remove("hidden");
+});
+
 const noBtn = document.getElementById("no");
+const container = document.querySelector(".container");
 const messages = [
     "Are you sure? 🥺",
     "Think again 💭",
@@ -134,35 +128,25 @@ const messages = [
 ];
 
 noBtn.addEventListener("click", () => {
-    /
-    const container = document.querySelector(".container");
     const maxX = container.offsetWidth - noBtn.offsetWidth;
     const maxY = container.offsetHeight - noBtn.offsetHeight;
     
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
-    noBtn.style.position = "absolute";
+    
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
 
-    
     const msg = document.createElement("div");
     msg.className = "message";
     msg.innerText = messages[Math.floor(Math.random() * messages.length)];
     container.appendChild(msg);
 
-   
     const msgX = x + noBtn.offsetWidth / 2;
     msg.style.left = `${msgX}px`;
     msg.style.top = `${y - 40}px`;
 
-    
     setTimeout(() => msg.remove(), 1500);
-});
-
-document.getElementById("yes").addEventListener("click", () => {
-    document.getElementById("main").classList.add("hidden");
-    document.getElementById("yesPage").classList.remove("hidden");
 });
 </script>
 
