@@ -4,74 +4,75 @@
 <meta charset="UTF-8">
 <title>Proposal 💘</title>
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #ff4d6d, #ff99aa);
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff4d6d, #ff99aa);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .hearts {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        overflow: hidden;
-        z-index: 1;
-    }
-    .heart-float {
-        position: absolute;
-        bottom: -20px;
-        font-size: 20px;
-        animation: floatUp linear forwards;
-        opacity: 0.8;
-    }
-    @keyframes floatUp {
-        from { transform: translateY(0) scale(1); opacity: 1; }
-        to { transform: translateY(-110vh) scale(1.6); opacity: 0; }
-    }
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+.heart-float {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp linear forwards;
+    opacity: 0.8;
+}
+@keyframes floatUp {
+    from { transform: translateY(0) scale(1); opacity: 1; }
+    to { transform: translateY(-110vh) scale(1.6); opacity: 0; }
+}
 
-    .container {
-        z-index: 2;
-        text-align: center;
-        background: white;
-        padding: 30px;
-        border-radius: 20px;
-        width: 400px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        position: relative;
-    }
+.container {
+    z-index: 2;
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
 
-    .hidden { display: none; }
-    .heart { font-size: 60px; animation: pulse 1.5s infinite alternate; }
-    @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.3); } }
+.hidden { display: none; }
+.heart { font-size: 60px; animation: pulse 1.5s infinite alternate; }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.3); } }
 
-    h1 { color: #ff1a75; margin-bottom: 10px; }
-    p { color: #555; font-size: 16px; }
+h1 { color: #ff1a75; margin-bottom: 10px; }
+p { color: #555; font-size: 16px; }
 
-    img { width: 100%; height: auto; object-fit: contain; border-radius: 10px; margin: 15px 0; }
+img { width: 100%; height: auto; object-fit: contain; border-radius: 10px; margin: 15px 0; }
 
-    .buttons { display: flex; justify-content: space-around; margin-top: 20px; position: relative; height: 50px; }
-    button { padding: 10px 24px; font-size: 16px; border: none; border-radius: 20px; cursor: pointer; }
-    #yes { background: #ff4d6d; color: white; }
-    #no { background: #ddd; position: absolute; }
+.buttons { display: flex; justify-content: space-around; margin-top: 20px; position: relative; height: 50px; }
+button { padding: 10px 24px; font-size: 16px; border: none; border-radius: 20px; cursor: pointer; }
+#yes { background: #ff4d6d; color: white; }
+#no { background: #ddd; position: absolute; }
 
-    .message {
-        position: absolute;
-        background: #ffe6eb;
-        color: #ff1a75;
-        padding: 8px 14px;
-        border-radius: 20px;
-        font-size: 14px;
-        white-space: nowrap;
-        z-index: 10;
-    }
+.message {
+    position: absolute;
+    background: #ffe6eb;
+    color: #ff1a75;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 10;
+}
 </style>
 </head>
 <body>
@@ -94,7 +95,7 @@
     <h1>Thank you for letting me into your heart… you’ve made mine a home full of love and joy 💖</h1>
     <p>Every heartbeat whispers your name, Charmi.</p>
     <p><strong>Our Date:</strong><br>🌹 14th February<br>🍽️ Dinner • Endless Talks</p>
-    <<p>No matter the distance or time,<br>my heart will always be yours, Dhaval ❤️</p>
+    <p>No matter the distance or time,<br>my heart will always be yours, Dhaval ❤️</p>
 </div>
 
 <script>
@@ -116,7 +117,7 @@ document.getElementById("yes").addEventListener("click", () => {
 });
 
 const noBtn = document.getElementById("no");
-const container = document.querySelector(".container");
+const container = document.getElementById("main");
 const messages = [
     "Are you sure? 🥺",
     "Hey… don’t rush 😅",
@@ -124,23 +125,20 @@ const messages = [
     "My heart is waiting 💕",
     "Please reconsider! 😍",
     "I promise it’ll be fun! 💖"
-    
 ];
 
 noBtn.addEventListener("click", () => {
-    // Get container dimensions
-    const containerRect = container.getBoundingClientRect();
     const btnWidth = noBtn.offsetWidth;
     const btnHeight = noBtn.offsetHeight;
+    const maxX = container.clientWidth - btnWidth;
+    const maxY = container.clientHeight - btnHeight;
 
-    // Random position inside container (fully visible)
-    const x = Math.random() * (containerRect.width - btnWidth);
-    const y = Math.random() * (containerRect.height - btnHeight);
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-    // Floating message
     const msg = document.createElement("div");
     msg.className = "message";
     msg.innerText = messages[Math.floor(Math.random() * messages.length)];
@@ -151,7 +149,6 @@ noBtn.addEventListener("click", () => {
     msg.style.top = `${y - 40}px`;
 
     setTimeout(() => msg.remove(), 1500);
-});
 });
 </script>
 
